@@ -41,6 +41,8 @@ export default {
     },
 
     data() {
+       // Defining the initial state of the component's data properties `email` and `password` as empty
+       // strings.
         return {
             email:'',
             password:''
@@ -56,11 +58,23 @@ export default {
 
             //conexao ajax
             axios.post('/login', payload).then((response) => {
+
+                // `const token = `${response.data.token_type} ${response.data.access_token}`;` is
+                // creating a string that concatenates the `token_type` and `access_token` values from
+                // the `response.data` object returned by the server after a successful login request.
+                // This string represents the authentication token that will be used to authenticate
+                // subsequent requests to the server.
                 const token = `${response.data.token_type} ${response.data.access_token}`; 
 
                 Cookie.set('_todolist_token', token, {
                     expires:30
                 });
+
+                // `this..commit('user/STORE_USER', response.data.data)` is committing a mutation
+                // called `STORE_USER` to the Vuex store's `user` module. The mutation is passing
+                // `response.data.data` as the payload, which will update the state of the `user`
+                // module with the new user data.
+                this.$store.commit('user/STORE_USER', response.data.data);
             });
 
         },
