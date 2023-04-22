@@ -9,7 +9,7 @@
 import axios from 'axios';
 // import axios from 'axios';
 
-const _axios = axios.create({
+const api = axios.create({
     baseURL: "http://127.0.0.1:8844/api/v1",
     headers: {
         'Content-Type': 'application/json',
@@ -19,4 +19,4 @@ const _axios = axios.create({
 
 });
 
-export default _axios;
+export default api;

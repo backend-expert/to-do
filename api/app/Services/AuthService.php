@@ -2,7 +2,9 @@
 namespace App\Services;
 
 use App\Exceptions\LoginInvalidException;
-
+use App\Exceptions\UserHasBeenTakenException;
+use App\Models\User;
+use Illuminate\Support\Str;
 
 class AuthService{
 
@@ -23,8 +25,6 @@ class AuthService{
                 'test error'
             );
 
-
-
         };
 
         return [
@@ -32,6 +32,30 @@ class AuthService{
             'token_type'=> 'Bearer'
 
         ];
+    }
+
+    public function register(string $first_Name, string $lastName, string $Email, string $Password)
+    {
+        // dd('register metodo');
+        $user = User::where('email', $Email)->exists();
+        if (!empty($user))
+        {
+            throw new UserHasBeenTakenException();
+        }
+
+        $user_password = bcrypt($Password ?? Str::random(10));
+
+    $user = User::create([
+            'first_name'=>$first_Name,
+            'last_name'=>$lastName,
+            'email'=>$Email,
+            'password'=> $user_password,
+            'confirmation_token'=> Str::random(60)
+
+        ]);
+
+        return $user;
+
     }
 
 }
