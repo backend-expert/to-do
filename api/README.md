@@ -22,3 +22,9 @@ gerar key app
 `php artisan key:generate`
 Resource
 `php artisan make:resource UserResource`
+Events 
+`php artisan make:event UserRegistered`
+listener 
+`php artisan make:listener SendWelcomeNotification`
+Email 
+`php artisan make:mail WelcomeMail` 

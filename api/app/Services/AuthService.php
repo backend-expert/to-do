@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Events\UserRegistered;
 use App\Exceptions\LoginInvalidException;
 use App\Exceptions\UserHasBeenTakenException;
 use App\Models\User;
@@ -45,7 +46,7 @@ class AuthService{
 
         $user_password = bcrypt($Password ?? Str::random(10));
 
-    $user = User::create([
+        $user = User::create([
             'first_name'=>$first_Name,
             'last_name'=>$lastName,
             'email'=>$Email,
@@ -54,8 +55,17 @@ class AuthService{
 
         ]);
 
+
+        //send email bugado !
+        //event(new UserRegistered($user));
+
         return $user;
 
+    }
+
+    public function verifyEmail()
+    {
+        dd('verify email');
     }
 
 }

@@ -60,4 +60,9 @@ class AuthController extends Controller
 
         return new UserResource($user);
     }
+
+    public function verifyEmail()
+    {
+        $this->authService->verifyEmail();
+    }
 }
