@@ -2,12 +2,15 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/login">Login</router-link>
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/register">Register</router-link>
+
   </nav>
   <!-- <div id="app">
     <RouterView />
   </div> -->
-
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
   <router-view></router-view>
   
 </template>
